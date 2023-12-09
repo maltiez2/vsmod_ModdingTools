@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeBuild", "CakeBuild\CakeBuild.csproj", "{39C4DCD7-DCA8-4B35-958C-C208783B6F48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "moddingtools", "moddingtools\moddingtools.csproj", "{50998C72-7CCD-40DE-A41C-E11080770076}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39C4DCD7-DCA8-4B35-958C-C208783B6F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C4DCD7-DCA8-4B35-958C-C208783B6F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C4DCD7-DCA8-4B35-958C-C208783B6F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C4DCD7-DCA8-4B35-958C-C208783B6F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50998C72-7CCD-40DE-A41C-E11080770076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50998C72-7CCD-40DE-A41C-E11080770076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50998C72-7CCD-40DE-A41C-E11080770076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50998C72-7CCD-40DE-A41C-E11080770076}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {886CF9FF-78D1-4DB6-B833-BB665C8CFCF6}
+	EndGlobalSection
+EndGlobal

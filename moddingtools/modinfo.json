@@ -6,7 +6,7 @@
         "Maltiez"
     ],
     "description": "Collection of tools for modders",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "dependencies": {
         "game": "1.18.8",
         "vsimgui": "0.1.0"

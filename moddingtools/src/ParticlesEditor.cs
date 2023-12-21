@@ -18,7 +18,7 @@ namespace ModdingTools
         {
             mClientApi = api;
             mSelectedBlock = block;
-            if (block != null)
+            if (block != null && block.ParticleProperties != null)
             {
                 List<AdvancedParticleProperties> backup = new();
                 foreach (AdvancedParticleProperties property in block.ParticleProperties)
@@ -406,8 +406,8 @@ namespace ModdingTools
 
             int currentModel = (int)value.Transform;
             float currentFactor = value.Factor;
-            ImGui.Combo($"##{label}{id}", ref currentModel, TransformFunction, 12, 12);
-            ImGui.DragFloat($"##{label}{id}", ref currentFactor);
+            ImGui.Combo($"##combo{label}{id}", ref currentModel, TransformFunction, 12, 12);
+            ImGui.DragFloat($"##drag{label}{id}", ref currentFactor);
 
             EnumTransformFunction newTransform = (EnumTransformFunction)currentModel;
 

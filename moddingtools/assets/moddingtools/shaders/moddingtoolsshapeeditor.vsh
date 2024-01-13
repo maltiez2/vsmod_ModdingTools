@@ -33,7 +33,7 @@ out vec4 gnormal;
 
 void main(void)
 {
-	mat4 animModelMat = modelViewMatrix;
+	mat4 animModelMat = modelViewMatrix * mat4(elementTransforms[jointId]);
 	vec4 cameraPos = animModelMat * vec4(vertexPositionIn, 1.0);
 	
 	int glow = min(255, extraGlow + (flags & GlowLevelBitMask));

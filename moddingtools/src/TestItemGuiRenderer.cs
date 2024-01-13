@@ -7,6 +7,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.Client.NoObf;
+using Vintagestory.GameContent;
 
 namespace ModdingTools.Render;
 
@@ -108,7 +109,7 @@ public class TestItemGuiRenderer : IRenderer
         prog.BindTexture2D("itemTex", renderInfo.TextureId, 0);
         prog.UniformMatrix("projectionMatrix", rpi.CurrentProjectionMatrix);
 
-       /* prog.UniformMatrices4x3(
+        /*prog.UniformMatrices4x3(
             "elementTransforms",
             GlobalConstants.MaxAnimatedElements,
             mShape?.Animator?.TransformationMatrices4x3

@@ -9,6 +9,78 @@ using VSImGui.src.ImGui;
 
 namespace ModdingTools;
 
+public interface IModdingTool
+{
+    VSDialogStatus Draw(float deltaSeconds);
+}
+
+public delegate IModdingTool? ToolProducerDelegate(Selection selection);
+public delegate string? SelectionOptionDelegate(Selection selection);
+
+public class SelectionMenuToolsManager : IModdingTool
+{
+    public SelectionMenuToolsManager(ICoreClientAPI api)
+    {
+        _api = api;
+        _imGuiSystem = api.ModLoader.GetModSystem<ImGuiModSystem>();
+    }
+
+    public int Register(ToolProducerDelegate toolDelegate, SelectionOptionDelegate selectionDelegate)
+    {
+        int id = ++_delegatesCounter;
+        _toolDelegates.Add(id, toolDelegate);
+        _selectionDelegates.Add(id, selectionDelegate);
+        return id;
+    }
+    public void Unregister(int id)
+    {
+        _toolDelegates.Remove(id);
+        _selectionDelegates.Remove(id);
+    }
+    public VSDialogStatus Draw(float deltaSeconds)
+    {
+        VSDialogStatus status = VSDialogStatus.Closed;
+
+        if (_openPopup)
+        {
+            ImGui.OpenPopup("Modding tools");
+            _openPopup = false;
+            _imGuiSystem.Show();
+            status = VSDialogStatus.GrabMouse;
+        }
+
+        foreach (IModdingTool tool in _activeTools)
+        {
+            VSDialogStatus toolStatus = tool.Draw(deltaSeconds);
+            switch (toolStatus)
+            {
+                case VSDialogStatus.Closed:
+                    _activeTools.Remove(tool);
+                    break;
+                case VSDialogStatus.GrabMouse:
+                    status = VSDialogStatus.GrabMouse;
+                    break;
+                case VSDialogStatus.DontGrabMouse:
+                    if (status == VSDialogStatus.Closed) status = VSDialogStatus.DontGrabMouse;
+                    break;
+            }
+        }
+
+        return status;
+    }
+
+    private readonly ICoreClientAPI _api;
+    private readonly ImGuiModSystem _imGuiSystem;
+
+    private readonly Dictionary<int, ToolProducerDelegate> _toolDelegates = new();
+    private readonly Dictionary<int, SelectionOptionDelegate> _selectionDelegates = new();
+    private int _delegatesCounter = 0;
+
+    private readonly List<IModdingTool> _activeTools = new();
+    private bool _openPopup = false;
+
+}
+
 public class ToolsManager
 {
     private bool _openPopup = false;
@@ -96,31 +168,6 @@ public class ToolsManager
             OpenParticleEditor(blockInSlot);
             ImGui.CloseCurrentPopup();
         }
-
-        /*if (mSelection.SlotSelection?.Itemstack?.Item?.Shape is CompositeShape itemShape && ImGui.Selectable("Edit item model"))
-        {
-            mRenderer.mSlot = mSelection.SlotSelection;
-
-            mRenderer.mShape = new(mClientApi, mSelection.SlotSelection?.Itemstack?.Item?.Shape?.Base?.Path ?? "");
-
-            ImGui.CloseCurrentPopup();
-        }
-        if (mSelection.SlotSelection?.Itemstack?.Block?.ShapeInventory is CompositeShape blockShape && ImGui.Selectable("Edit block model"))
-        {
-            OpenShapeEditor(blockShape);
-            ImGui.CloseCurrentPopup();
-        }
-        if (mSelection.EntitySelection?.Properties?.Client?.Shape is CompositeShape entityShape && ImGui.Selectable("Edit entity model"))
-        {
-            OpenShapeEditor(entityShape);
-            ImGui.CloseCurrentPopup();
-        }
-
-        if (mSelection.SlotSelection == null && mSelection.BlockSelection?.Shape is CompositeShape inWorldBlockShape && ImGui.Selectable("Edit block model"))
-        {
-            OpenShapeEditor(inWorldBlockShape);
-            ImGui.CloseCurrentPopup();
-        }*/
 
         ImGui.EndPopup();
     }

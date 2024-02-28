@@ -5,12 +5,10 @@ namespace ModdingTools;
 
 public class ModdingToolsSystem : ModSystem
 {
-    private ToolsManager? mToolsManager;
-
     public override void StartClientSide(ICoreClientAPI api)
     {
-        mToolsManager = new ToolsManager(api);
-        api.ModLoader.GetModSystem<VSImGui.ImGuiModSystem>().Draw += mToolsManager.RenderTools;
+        ToolsManager toolsManager = new(api);
+        api.ModLoader.GetModSystem<VSImGui.ImGuiModSystem>().Draw += toolsManager.RenderTools; // @TODO remove on dispose
         Widgets.InitStyles(api);
         Editors.InitStyles(api);
     }

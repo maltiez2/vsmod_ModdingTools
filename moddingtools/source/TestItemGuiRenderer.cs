@@ -46,7 +46,7 @@ public class TestItemGuiRenderer : IRenderer
     }
     public void OnRenderFrame(float deltaTime, EnumRenderStage stage)
     {
-        if (mSlot == null) return;
+        /*if (mSlot == null) return;
         
         Matrixf modelMat = new();
         modelMat.Values = mModelMat;
@@ -55,7 +55,7 @@ public class TestItemGuiRenderer : IRenderer
         using (new RenderedTexture(mClientApi))
         {
             RenderHandFp(mSlot, itemStackRenderInfo, modelMat);
-        }
+        }*/
     }
     private void RenderHandFp(ItemSlot inSlot, ItemRenderInfo renderInfo, Matrixf modelMat)
     {

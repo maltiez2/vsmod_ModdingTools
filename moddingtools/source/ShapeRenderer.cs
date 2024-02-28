@@ -94,7 +94,7 @@ namespace ModdingTools
 
         public void RenderItemstackToGui(ItemSlot inSlot, double posX, double posY, double posZ, float size, int color, float dt, bool shading = true, bool origRotate = false, bool showStackSize = true)
         {
-            Matrixf modelMat = new();
+            /*Matrixf modelMat = new();
             ItemStack itemstack = inSlot.Itemstack;
             ItemRenderInfo renderInfo = mClientApi.Render.GetItemStackRenderInfo(inSlot, EnumItemRenderTarget.Gui);
             if (renderInfo.ModelRef == null)
@@ -173,12 +173,12 @@ namespace ModdingTools
             UnbindTextureFrameBuffer();
 
             prog?.Stop();
-            prevProg?.Use();
+            prevProg?.Use();*/
         }
 
         public void RenderItemstackToGuiOld(ItemSlot inSlot, double posX, double posY, double posZ, float size, int color, float dt, bool shading = true, bool origRotate = false, bool showStackSize = true)
         {
-            ShaderProgramGui shader = ShaderPrograms.Gui;
+            /*ShaderProgramGui shader = ShaderPrograms.Gui;
             Matrixf modelMat = new();
 
             IShaderProgram prevProg = mClientApi.Render.CurrentActiveShader;
@@ -209,7 +209,7 @@ namespace ModdingTools
             modelMat.Translate(transform.Origin.X + GuiElement.scaled(transform.Translation.X), transform.Origin.Y + GuiElement.scaled(transform.Translation.Y), (double)(transform.Origin.Z * size) + GuiElement.scaled(transform.Translation.Z));
             modelMat.Scale(size * transform.ScaleXYZ.X, size * transform.ScaleXYZ.Y, size * transform.ScaleXYZ.Z);
             modelMat.RotateXDeg(transform.Rotation.X + (flag ? 180f : 0f));
-            modelMat.RotateYDeg(transform.Rotation.Y - (float)((!flag) ? 1 : (-1)) * (flag2 ? ((float)/*game.Platform.EllapsedMs*/0 / 50f) : 0f));
+            modelMat.RotateYDeg(transform.Rotation.Y - (float)((!flag) ? 1 : (-1)) * (flag2 ? ((float)*//*game.Platform.EllapsedMs*//*0 / 50f) : 0f));
             modelMat.RotateZDeg(transform.Rotation.Z);
             modelMat.Translate(0f - transform.Origin.X, 0f - transform.Origin.Y, 0f - transform.Origin.Z);
             int num = (int)itemstack.Collectible.GetTemperature(mClientApi.World, itemstack);
@@ -240,7 +240,7 @@ namespace ModdingTools
             shader.ModelViewMatrix = modelMat.ReverseMul((mClientApi.World as ClientMain)?.CurrentModelViewMatrix).Values;
             shader.ApplyModelMat = 1;
             
-            /*if (game.api.eventapi.itemStackRenderersByTarget[(int)itemstack.Collectible.ItemClass][0].TryGetValue(itemstack.Collectible.Id, out var value))
+            *//*if (game.api.eventapi.itemStackRenderersByTarget[(int)itemstack.Collectible.ItemClass][0].TryGetValue(itemstack.Collectible.Id, out var value))
             {
                 value(inSlot, itemStackRenderInfo, modelMat, posX, posY, posZ, size, color, origRotate, showStackSize);
                 shader.ApplyModelMat = 0;
@@ -248,7 +248,7 @@ namespace ModdingTools
                 shader.RgbaGlowIn = new Vec4f(0f, 0f, 0f, 0f);
                 shader.AlphaTest = 0f;
                 return;
-            }*/
+            }*//*
 
             shader.DamageEffect = itemStackRenderInfo.DamageEffect;
 
@@ -263,7 +263,7 @@ namespace ModdingTools
             shader.TempGlowMode = 0;
             shader.DamageEffect = 0f;
             
-            /*LoadedTexture value2 = null;
+            *//*LoadedTexture value2 = null;
             if (itemstack.StackSize != 1 && showStackSize)
             {
                 float num3 = size / (float)GuiElement.scaled(25.600000381469727);
@@ -280,18 +280,18 @@ namespace ModdingTools
                 game.Platform.GlToggleBlend(on: true, EnumBlendMode.PremultipliedAlpha);
                 game.Render2DLoadedTexture(value2, (int)(posX + (double)size + 1.0 - value2.Width), (int)(posY + (double)num4 * GuiElement.scaled(3.0) - GuiElement.scaled(4.0)), (int)posZ + 100);
                 game.Platform.GlToggleBlend(on: true);
-            }*/
+            }*//*
 
             shader.AlphaTest = 0f;
             shader.RgbaGlowIn = new Vec4f(0f, 0f, 0f, 0f);
 
             prog?.Stop();
-            prevProg?.Use();
+            prevProg?.Use();*/
         }
 
         public int Render(ImGuiShape model, Selection selection, Matrixf modelMat, int textureId, bool normalShaded = true)
         {
-            ItemRenderInfo renderInfo = mClientApi.Render.GetItemStackRenderInfo(selection.SlotSelection.Itemstack, EnumItemRenderTarget.HandFp);
+            /*ItemRenderInfo renderInfo = mClientApi.Render.GetItemStackRenderInfo(selection.SlotSelection.Itemstack, EnumItemRenderTarget.HandFp);
 
             IShaderProgram prevProg = mClientApi.Render.CurrentActiveShader;
             IShaderProgram prog;
@@ -306,14 +306,14 @@ namespace ModdingTools
             prog.Uniform("normalShaded", normalShaded ? 1 : 0);
             prog.Uniform("overlayOpacity", 0); // renderInfo.OverlayOpacity); // @TODO for overlay
 
-            /*if (renderInfo.OverlayTexture != null && renderInfo.OverlayOpacity > 0f)
+            *//*if (renderInfo.OverlayTexture != null && renderInfo.OverlayOpacity > 0f)
             {
                 prog.Uniform("tex2dOverlay", renderInfo.OverlayTexture.TextureId);
                 prog.Uniform("overlayTextureSize", new Vec2f(renderInfo.OverlayTexture.Width, renderInfo.OverlayTexture.Height));
                 prog.Uniform("baseTextureSize", new Vec2f(renderInfo.TextureSize.Width, renderInfo.TextureSize.Height));
                 TextureAtlasPosition textureAtlasPosition = mClientApi.Render.GetTextureAtlasPosition(inSlot.Itemstack);
                 prog.Uniform("baseUvOrigin", new Vec2f(textureAtlasPosition.x1, textureAtlasPosition.y1));
-            }*/ // Overlay
+            }*//* // Overlay
 
             Vec4f lightRGBSVec4f = mClientApi.World.BlockAccessor.GetLightRGBs((int)(mClientApi.World.Player.Entity.Pos.X + mClientApi.World.Player.Entity.LocalEyePos.X), (int)(mClientApi.World.Player.Entity.Pos.Y + mClientApi.World.Player.Entity.LocalEyePos.Y), (int)(mClientApi.World.Player.Entity.Pos.Z + mClientApi.World.Player.Entity.LocalEyePos.Z));
             int num16 = 0; // (int)inSlot.Itemstack.Collectible.GetTemperature(mClientApi.World, inSlot.Itemstack);
@@ -353,7 +353,7 @@ namespace ModdingTools
             UnbindTextureFrameBuffer();
 
             prog?.Stop();
-            prevProg?.Use();
+            prevProg?.Use();*/
 
             return mTexture;
         }

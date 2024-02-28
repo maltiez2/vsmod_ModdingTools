@@ -7,6 +7,7 @@ using System.Numerics;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using VSImGui.src.ImGui;
 
 namespace ModdingTools
 {
@@ -37,8 +38,10 @@ namespace ModdingTools
             mRenderer = new(api);
         }
 
-        public void RenderTools()
+        public VSDialogStatus RenderTools(float deltaSeconds)
         {
+            bool opened = false;
+            
             if (mOpenPopup)
             {
                 ImGui.OpenPopup("Modding tools");
@@ -53,8 +56,10 @@ namespace ModdingTools
 
                 ImGui.SetNextWindowSize(new Vector2(300, 500), ImGuiCond.FirstUseEver);
                 ImGui.Begin($"Particles editor: {code}", ref open);
-                editor.RenderWindow();
+                editor.Draw();
                 ImGui.End();
+
+                if (open) opened = true;
 
                 if (!open)
                 {
@@ -90,7 +95,11 @@ namespace ModdingTools
                 }
 
                 ImGui.End();
+
+                opened = true;
             }
+
+            return opened ? VSDialogStatus.GrabMouse : VSDialogStatus.Closed;
         }
 
         private bool ToggleCursorLock(KeyCombination keyCombination)

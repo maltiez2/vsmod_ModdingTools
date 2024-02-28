@@ -333,22 +333,22 @@ public class ParticlePropertiesEditor
     private void ColorEvolving()
     {
         EvolvingNatFloat? opacity = _properties.OpacityEvolve;
-        Editors.EvolvingNatFloatEditorNullable(_id, "Opacity", ref opacity);
+        PrticlePropertiesEditors.EvolvingNatFloatEditorNullable(_id, "Opacity", ref opacity);
         if (_properties.OpacityEvolve != opacity) _modified = true;
         _properties.OpacityEvolve = opacity;
 
         EvolvingNatFloat? red = _properties.RedEvolve;
-        Editors.EvolvingNatFloatEditorNullable(_id, "Red", ref red);
+        PrticlePropertiesEditors.EvolvingNatFloatEditorNullable(_id, "Red", ref red);
         if (_properties.RedEvolve != red) _modified = true;
         _properties.RedEvolve = red;
 
         EvolvingNatFloat? green = _properties.GreenEvolve;
-        Editors.EvolvingNatFloatEditorNullable(_id, "Green", ref green);
+        PrticlePropertiesEditors.EvolvingNatFloatEditorNullable(_id, "Green", ref green);
         if (_properties.GreenEvolve != green) _modified = true;
         _properties.GreenEvolve = green;
 
         EvolvingNatFloat? blue = _properties.BlueEvolve;
-        Editors.EvolvingNatFloatEditorNullable(_id, "Blue", ref blue);
+        PrticlePropertiesEditors.EvolvingNatFloatEditorNullable(_id, "Blue", ref blue);
         if (_properties.BlueEvolve != blue) _modified = true;
         _properties.BlueEvolve = blue;
     }
@@ -356,25 +356,25 @@ public class ParticlePropertiesEditor
     private void SpawnProperties()
     {
         NatFloat lifeLength = _properties.LifeLength;
-        Editors.NatFloatEditor(_id, "Life length", ref lifeLength);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Life length", ref lifeLength);
         _properties.LifeLength = lifeLength;
 
         NatFloat quantity = _properties.Quantity;
-        Editors.NatFloatEditor(_id, "Quantity", ref quantity);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Quantity", ref quantity);
         _properties.Quantity = quantity;
 
         NatFloat SecondarySpawnInterval = _properties.SecondarySpawnInterval;
-        Editors.NatFloatEditor(_id, "Secondary spawn interval", ref SecondarySpawnInterval, 250);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Secondary spawn interval", ref SecondarySpawnInterval, 250);
         _properties.SecondarySpawnInterval = SecondarySpawnInterval;
 
         NatFloat[] PosOffset = _properties.PosOffset;
-        Editors.NatFloatVecEditor(_id, "Position offset", ref PosOffset);
+        PrticlePropertiesEditors.NatFloatVecEditor(_id, "Position offset", ref PosOffset);
         _properties.PosOffset = PosOffset;
     }
     private void MotionProperties()
     {
         NatFloat gravity = _properties.GravityEffect;
-        Editors.NatFloatEditor(_id, "Gravity", ref gravity);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Gravity", ref gravity);
         _properties.GravityEffect = gravity;
 
         float WindAffectednes = _properties.WindAffectednes;
@@ -389,15 +389,15 @@ public class ParticlePropertiesEditor
     private void VelocityProperties()
     {
         NatFloat velocityX = _properties.Velocity[0];
-        Editors.NatFloatEditor(_id, "Velocity.X", ref velocityX);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Velocity.X", ref velocityX);
         _properties.Velocity[0] = velocityX;
 
         NatFloat velocityY = _properties.Velocity[1];
-        Editors.NatFloatEditor(_id, "Velocity.Y", ref velocityY);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Velocity.Y", ref velocityY);
         _properties.Velocity[1] = velocityY;
 
         NatFloat velocityZ = _properties.Velocity[2];
-        Editors.NatFloatEditor(_id, "Velocity.Z", ref velocityZ);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Velocity.Z", ref velocityZ);
         _properties.Velocity[2] = velocityZ;
     }
     private void VelocityEvolve()
@@ -437,26 +437,26 @@ public class ParticlePropertiesEditor
         if (_properties.VelocityEvolve != null)
         {
             EvolvingNatFloat velocityEvolveX = _properties.VelocityEvolve[0];
-            Editors.EvolvingNatFloatEditor(_id, "Velocity.X evolve", ref velocityEvolveX);
+            PrticlePropertiesEditors.EvolvingNatFloatEditor(_id, "Velocity.X evolve", ref velocityEvolveX);
             _properties.VelocityEvolve[0] = velocityEvolveX;
 
             EvolvingNatFloat velocityEvolveY = _properties.VelocityEvolve[1];
-            Editors.EvolvingNatFloatEditor(_id, "Velocity.Y evolve", ref velocityEvolveY);
+            PrticlePropertiesEditors.EvolvingNatFloatEditor(_id, "Velocity.Y evolve", ref velocityEvolveY);
             _properties.VelocityEvolve[1] = velocityEvolveY;
 
             EvolvingNatFloat velocityEvolveZ = _properties.VelocityEvolve[2];
-            Editors.EvolvingNatFloatEditor(_id, "Velocity.Z evolve", ref velocityEvolveZ);
+            PrticlePropertiesEditors.EvolvingNatFloatEditor(_id, "Velocity.Z evolve", ref velocityEvolveZ);
             _properties.VelocityEvolve[2] = velocityEvolveZ;
         }
     }
     private void SizeProperties()
     {
         NatFloat size = _properties.Size;
-        Editors.NatFloatEditor(_id, "Size", ref size);
+        PrticlePropertiesEditors.NatFloatEditor(_id, "Size", ref size);
         _properties.Size = size;
 
         EvolvingNatFloat? sizeEvolve = _properties.SizeEvolve;
-        Editors.EvolvingNatFloatEditorNullable(_id, "Size evolve", ref sizeEvolve);
+        PrticlePropertiesEditors.EvolvingNatFloatEditorNullable(_id, "Size evolve", ref sizeEvolve);
         _properties.SizeEvolve = sizeEvolve;
     }
 
@@ -511,7 +511,7 @@ public class ParticlePropertiesEditor
         flags.Lod0 = Lod0;
 
         EnumWindBitMode WindMode = flags.WindMode;
-        Editors.WindBitModeEditor(_id, "Wind mode", ref WindMode);
+        PrticlePropertiesEditors.WindBitModeEditor(_id, "Wind mode", ref WindMode);
         flags.WindMode = WindMode;
 
         int WindData = flags.WindData;
@@ -654,7 +654,7 @@ public class ParticlePropertiesEditor
     #endregion
 }
 
-public static partial class Editors
+public static partial class PrticlePropertiesEditors
 {
     public static string[] ParticleModels = new[] { "Quad", "Cube" };
     public static void ParticleModelEditor(int id, AdvancedParticleProperties particleProperties)
@@ -770,74 +770,5 @@ public static partial class Editors
         vector[0].var = variance.X;
         vector[1].var = variance.Y;
         vector[2].var = variance.Z;
-    }
-}
-
-public static partial class Widgets
-{
-    public static Style? RedButton { get; set; }
-    public static Style? GreenButton { get; set; }
-
-    public static bool InitButtonStyles(ICoreAPI api)
-    {
-        ImGuiModSystem? system = api.ModLoader.GetModSystem<ImGuiModSystem>();
-        Style? defaultStyle = system?.DefaultStyle;
-        if (defaultStyle == null) return false;
-
-        RedButton = new(defaultStyle)
-        {
-            ColorButton = new(0.6f, 0.4f, 0.4f, 1.0f),
-            ColorButtonHovered = new(1.0f, 0.5f, 0.5f, 1.0f),
-        };
-        GreenButton = new(defaultStyle)
-        {
-            ColorButton = new(0.4f, 0.6f, 0.4f, 1.0f),
-            ColorButtonHovered = new(0.5f, 1.0f, 0.5f, 1.0f),
-        };
-
-        return true;
-    }
-
-    public static bool ButtonWithConfirmation(string title, ref bool confirming, string confirm = "Confirm", string cancel = "Cancel")
-    {
-        if (RedButton == null || GreenButton == null)
-        {
-            return ImGui.Button(title);
-        }
-
-        if (confirming) ImGui.BeginDisabled();
-        if (ImGui.Button(title))
-        {
-            confirming = true;
-        }
-        if (confirming) ImGui.EndDisabled();
-
-        if (!confirming) return false;
-
-        ImGui.SameLine();
-        ImGui.Text(" : ");
-        ImGui.SameLine();
-
-        using (new StyleApplier(GreenButton))
-        {
-            if (ImGui.Button($"{confirm}##{title}"))
-            {
-                confirming = false;
-                return true;
-            }
-        }
-
-        ImGui.SameLine();
-
-        using (new StyleApplier(RedButton))
-        {
-            if (ImGui.Button($"{cancel}##{title}"))
-            {
-                confirming = false;
-                return false;
-            }
-        }
-
-        return false;
     }
 }

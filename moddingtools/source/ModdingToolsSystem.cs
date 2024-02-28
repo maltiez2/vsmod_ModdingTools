@@ -11,6 +11,7 @@ public class ModdingToolsSystem : ModSystem
     {
         mToolsManager = new ToolsManager(api);
         api.ModLoader.GetModSystem<VSImGui.ImGuiModSystem>().Draw += mToolsManager.RenderTools;
-        Widgets.InitButtonStyles(api);
+        Widgets.InitStyles(api);
+        Editors.InitStyles(api);
     }
 }

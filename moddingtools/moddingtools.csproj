@@ -2,7 +2,7 @@
   <!-- Mod info -->
   <PropertyGroup>
     <ModName>Modding Tools</ModName>
-    <GameVersion>1.19.3</GameVersion>
+    <GameVersion>1.19.4-rc.2</GameVersion>
     <Version>1.0.0-pre.1</Version>
     <ModId>moddingtools</ModId>
     <Description>Collection of tools for modders</Description>
@@ -175,8 +175,8 @@
       <AssetsFolder Include="$(AssetsDir)\**\*.*" />
       <ModIcon Include="$(ModIconFile)" />
     </ItemGroup>
-    <Copy SourceFiles="@(AssetsFolder)" DestinationFiles="@(AssetsFolder->'$(OutputPath)assets\%(RecursiveDir)%(Filename)%(Extension)')" Condition="Exists('$(AssetsDir)')"/>
-    <Copy SourceFiles="@(ModIcon)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ModIconFile)')"/>
+    <Copy SourceFiles="@(AssetsFolder)" DestinationFiles="@(AssetsFolder->'$(OutputPath)assets\%(RecursiveDir)%(Filename)%(Extension)')" Condition="Exists('$(AssetsDir)')" />
+    <Copy SourceFiles="@(ModIcon)" DestinationFolder="$(OutputPath)" Condition="Exists('$(ModIconFile)')" />
   </Target>
 
   <!-- Archives output directory into zip and puts it into Releases folder -->
@@ -185,11 +185,5 @@
     <MakeDir Directories="$(ReleasesDir)" />
     <Delete Files="$(ReleasePath)" />
     <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePath)" />
-  </Target>
-  <Target Name="ZipFilesDev" AfterTargets="CopyFilesToOutput" Condition=" '$(Configuration)' == 'Debug' ">
-    <Message Text="Pachaging into '$(ReleaseFile)'" Importance="high" />
-    <MakeDir Directories="$(ReleasesDir)" />
-    <Delete Files="$(ReleasePathDev)" />
-    <ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(ReleasePathDev)" />
   </Target>
 </Project>

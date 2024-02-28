@@ -12,14 +12,9 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using VSImGui;
-using static OpenTK.Graphics.OpenGL.GL;
+
 
 namespace ModdingTools;
-
-public interface IReferenceTypeEditor
-{
-    bool Draw();
-}
 
 public class ParticleEditor
 {
@@ -66,7 +61,6 @@ public class ParticleEditor
     private bool _confirmRestore;
 
     private string TitleGeneral(string text) => $"{text}##{_id}";
-    private string TitleSpecific(string text) => $"{text}##{_id}.{_current}";
     private bool ValidateCurrentIndex()
     {
         if (_current >= _editors.Count) _current = _editors.Count - 1;
@@ -116,7 +110,7 @@ public class ParticleEditor
         if (_current >= size) _current = size - 1;
         ImGui.SameLine();
         ImGui.PopItemWidth();
-        
+
         ImGui.PushItemWidth(300);
         ImGui.SliderInt(TitleGeneral("Effect##selector_2"), ref _current, 0, size - 1);
         ImGui.PopItemWidth();
@@ -125,6 +119,11 @@ public class ParticleEditor
     {
         AdvancedParticleProperties effect = new();
         _editors.Add(new(effect, _clientApi));
+        if (_selectedBlock.ParticleProperties == null)
+        {
+            _selectedBlock.ParticleProperties = new AdvancedParticleProperties[] { effect };
+            return;
+        }
         _selectedBlock.ParticleProperties = _selectedBlock.ParticleProperties.Append(effect).ToArray();
     }
     private void RemoveEffect()
@@ -146,7 +145,7 @@ public class ParticleEditor
     {
         _selectedBlock.ParticleProperties = _backup.Select(x => x.Clone()).ToArray();
         _editors.Clear();
-        foreach (var effect in _selectedBlock.ParticleProperties)
+        foreach (AdvancedParticleProperties? effect in _selectedBlock.ParticleProperties)
         {
             _editors.Add(new(effect, _clientApi));
         }
@@ -161,7 +160,7 @@ public class ParticleEditor
     }
 }
 
-public class ParticlePropertiesEditor : IReferenceTypeEditor
+public class ParticlePropertiesEditor
 {
     public ParticlePropertiesEditor(AdvancedParticleProperties properties, ICoreAPI api)
     {
